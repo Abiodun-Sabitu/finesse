@@ -5,17 +5,13 @@ export default function LoginLayout({
 }>) {
   return (
     <>
-      <main className="w-full h-screen overflow-x-hidden overflow-y-hidden">
-        <section className="flex">
-          <div className="md:static w-full absolute bg-[#f5efe614]">
-            <header>
-              <div className=" font-extrabold text-2xl ml-10 mt-5 text-[#259062]">
-                Finesse
-              </div>
-            </header>
-            {children}
-          </div>
-          <div className="w-full sm:bg-[url('/finesse_login_pattern.png')]  bg-[url('/finesse_login_pattern_mobile.png')] h-screen bg-no-repeat bg-right "></div>
+      <main className="w-full h-screen  xl:bg-[url('/bg-190.png')] bg-[#ccbca325] bg-[url('/bg-10.png')] md:bg-right-top bg-no-repeat overflow-y-hidden">
+        <div className="font-extrabold text-[1.9rem] pt-5 ml-10 text-seaGreen">
+          Finesse
+        </div>
+        {/* Form Wrapper */}
+        <section className="flex flex-col justify-center place-items-center px-6  py-28 md:py-20 w-full">
+          <div className="lg:w-4/12 md:w-7/12 w-11/12">{children}</div>
         </section>
       </main>
     </>

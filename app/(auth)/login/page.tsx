@@ -1,7 +1,9 @@
-import Login from "./Login";
+// import LoginForm from "./LoginForm";
+
+import OtpForm from "./OtpForm";
 
 const page = () => {
-  return <Login />;
+  return <OtpForm />;
 };
 
 export default page;
