@@ -1,9 +1,11 @@
 // import LoginForm from "./LoginForm";
 
-import OtpForm from "./OtpForm";
+// import ForgotPassword from "./ForgotPassword";
+import Register from "./Register";
+// import OtpForm from "./OtpForm";
 
 const page = () => {
-  return <OtpForm />;
+  return <Register />;
 };
 
 export default page;
