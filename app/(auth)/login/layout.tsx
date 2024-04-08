@@ -11,7 +11,7 @@ export default function LoginLayout({
         </div>
         {/* Form Wrapper */}
         <section className="flex flex-col justify-center place-items-center px-6  py-28 md:py-20 w-full">
-          <div className="lg:w-4/12 md:w-7/12 w-11/12">{children}</div>
+          <div className="lg:w-4/12 md:w-7/12 w-12/12">{children}</div>
         </section>
       </main>
     </>

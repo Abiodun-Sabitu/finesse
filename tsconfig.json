@@ -28,7 +28,8 @@
     ".next/types/**/*.ts",
     "app/(auth)/login/layout.js",
     "components/ui/cardWrapper.jsx",
-    "components/Wrapper.jsx"
+    "components/Wrapper.jsx",
+    "lib/countdownTimer.js"
   ],
   "exclude": ["node_modules"]
 }
