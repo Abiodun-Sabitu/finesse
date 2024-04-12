@@ -3,7 +3,8 @@
 import TextField from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import PasswordField from "@/components/ui/passwordField";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "@/lib/hooks/authContext";
 
 // Login form
 const LoginForm = () => {
@@ -11,6 +12,7 @@ const LoginForm = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(true);
 
   const [loginForm, setLoginForm] = useState({});
+  const { setCurrentView } = useContext(AuthContext);
 
   return (
     <>
@@ -38,15 +40,23 @@ const LoginForm = () => {
               setPasswordVisibility(!passwordVisibility)
             }
           />
-
+          <div
+            className=" font-semibold text-battleShipGrey mt-20 cursor-pointer"
+            onClick={() => setCurrentView("forgotPassword")}
+          >
+            Forgot Password?
+          </div>
           <div className="">
-            <Button className="w-full h-12 " variant="long">
+            <Button className="w-full h-12 mt-8" variant="long">
               <span className=""> Login</span>
             </Button>
           </div>
-          <p className="text-center mt-5 cursor-pointer text-battleShipGrey">
+          <div
+            className="text-center mt-5 cursor-pointer text-battleShipGrey"
+            onClick={() => setCurrentView("register")}
+          >
             Create New Account
-          </p>
+          </div>
         </form>
       </div>
     </>

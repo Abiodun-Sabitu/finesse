@@ -3,7 +3,7 @@
 import TextField from "@/components/ui/input";
 import PasswordField from "@/components/ui/passwordField";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -11,8 +11,18 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import useCountdownTimer from "@/lib/hooks/useCountDownTimer";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-const ForgotPassword = () => {
+import { Checkbox } from "@/components/ui/checkbox";
+import { AuthContext } from "@/lib/hooks/authContext";
+
+const Register = () => {
   // States
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [value, setOtpValue] = useState("");
@@ -26,19 +36,35 @@ const ForgotPassword = () => {
   };
 
   const timeLeft = useCountdownTimer(60);
+  const { setCurrentView } = useContext(AuthContext);
 
   return (
     <>
       <div className="bg-[#f5efe6d7] shadow-2xl rounded-lg">
         <form className="p-8 rounded-lg" onSubmit={(e) => e.preventDefault()}>
           <h3 className="text-[1.2rem] font-extrabold text-khaki text-center pb-3">
-            Forgot Password
+            New User Sign Up
           </h3>
           {value.length < 6 ? (
             <>
+              {/* <div className="mt-2">
+                <p className=" font-semibold text-darkGreen mb-2">
+                  Merchant Type
+                </p>
+                <Select>
+                  <SelectTrigger className="w-full mb-5">
+                    <SelectValue placeholder="Select your merchant type " />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">Retailer</SelectItem>
+                    <SelectItem value="dark">Wholesaler</SelectItem>
+                    <SelectItem value="system">Distributor</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div> */}
               <div className="relative ">
                 <Button
-                  className="mt-8 h-12 float-end relative z-30 cursor-pointer rounded-s-none"
+                  className="mt-8 h-11 float-end relative z-30 cursor-pointer rounded-s-none"
                   variant="long"
                 >
                   {timeLeft > 0 ? "Get OTP" : "Resend"}
@@ -48,10 +74,11 @@ const ForgotPassword = () => {
                   name="userEmail"
                   type="email"
                   label="Email"
-                  placeholder="Registered email"
+                  placeholder="Verify your email"
                   className="absolute"
                 />
               </div>
+
               <div className="flex flex-col place-items-center mt-20">
                 <p className="text-sm text-darkGreen text-center mt-2 mb-3">
                   Enter the OTP sent to your email to continue
@@ -91,11 +118,11 @@ const ForgotPassword = () => {
           ) : (
             <>
               <PasswordField
-                id="new_password"
+                id="create_password"
                 type="password"
-                name="newPassword"
-                label="New Password"
-                placeholder="Enter new password"
+                name="createPassword"
+                label="Create Password"
+                placeholder="Enter password"
                 passwordVisibility={passwordVisibility}
                 handlePasswordToggleState={() =>
                   setPasswordVisibility(!passwordVisibility)
@@ -114,10 +141,38 @@ const ForgotPassword = () => {
                   }
                 />
               </div>
+              {/* <div className="mt-20">
+                <TextField
+                  id="phone_number"
+                  name="phoneNumber"
+                  type="select"
+                  label="Phone Number"
+                  placeholder="Enter Your Phone Number"
+                />
+              </div> */}
+
+              <div className="flex items-center mt-20 gap-2 place-items-center">
+                <Checkbox id="terms" checked />
+                <label htmlFor="terms" className="text-battleShipGray text-sm">
+                  Yes I agree to the{" "}
+                  <span className="underline cursor-pointer">terms of use</span>{" "}
+                </label>
+              </div>
+
               <div>
-                <Button className="w-full h-12" variant="long">
-                  <span>Reset Password</span>
+                <Button
+                  className="w-full h-12"
+                  variant="long"
+                  onClick={() => setCurrentView("login")}
+                >
+                  <span>Sign Up</span>
                 </Button>
+              </div>
+              <div
+                className="text-center mt-5 cursor-pointer text-battleShipGrey"
+                onClick={() => setCurrentView("login")}
+              >
+                Already Have an account? Login
               </div>
             </>
           )}
@@ -127,4 +182,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default Register;

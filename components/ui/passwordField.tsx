@@ -49,7 +49,7 @@ const PasswordField = React.forwardRef<HTMLInputElement, InputProps>(
             autoSave="off"
             type={passwordVisibility ? type : "text"}
             className={cn(
-              `flex h-12 w-full rounded-md 
+              `flex h-11 w-full rounded-md 
             px-3 py-1 text-md shadow-sm 
             bg-white/70 absolute ring-1 ring-battleShipGrey/55
              focus-visible:outline-none placeholder:text-silver

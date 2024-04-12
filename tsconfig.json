@@ -26,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(auth)/login/layout.js",
+    "app/auth/login/layout.js",
     "components/ui/cardWrapper.jsx",
     "components/Wrapper.jsx",
     "lib/countdownTimer.js"

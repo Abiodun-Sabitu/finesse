@@ -47,7 +47,7 @@ const OtpForm = () => {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
-            <div className="flex flex-row items-center mt-4 gap-2">
+            <div className="flex flex-row items-center mt- gap-2">
               <Button
                 className={`p-0 ${timeLeft ? "text-silver" : "text-seaGreen"} `}
                 variant="link"
