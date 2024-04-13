@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { Html } from "next/document";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -8,17 +9,21 @@ export interface InputProps
   id: string;
   placeholder: string;
   type: string;
-  // value: string;
+  value: string;
   name: string;
+  htmlFor: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, type, htmlFor, id, ...props }, ref) => {
     return (
       <div className="mb-7">
-        <p className=" font-semibold text-darkGreen mb-2">{props.label}</p>
+        <p className=" font-semibold text-darkGreen mb-2">
+          <label htmlFor={htmlFor}>{props.label}</label>
+        </p>
         <input
           autoComplete="off"
+          id={id}
           type={type}
           className={cn(
             `flex h-11 w-full rounded-md  

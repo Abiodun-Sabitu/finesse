@@ -51,6 +51,7 @@ const ForgotPassword = () => {
                   label="Email"
                   placeholder="Registered email"
                   className="absolute"
+                  htmlFor="email"
                 />
               </div>
               <div className="flex flex-col place-items-center mt-20">
@@ -96,6 +97,7 @@ const ForgotPassword = () => {
                 type="password"
                 name="newPassword"
                 label="New Password"
+                htmlFor="new_password"
                 placeholder="Enter new password"
                 passwordVisibility={passwordVisibility}
                 handlePasswordToggleState={() =>
@@ -107,6 +109,7 @@ const ForgotPassword = () => {
                   id="confirm_password"
                   type="password"
                   name="confirmPassword"
+                  htmlFor="confirm_password"
                   label="Confirm Password"
                   placeholder="Confirm password"
                   passwordVisibility={passwordVisibility}

@@ -9,7 +9,8 @@ export interface InputProps
   id: string;
   placeholder: string;
   type: string;
-  // value: string;
+  htmlFor: string;
+  value: string;
   name: string;
   passwordVisibility: boolean;
   handlePasswordToggleState: (state: boolean) => void;
@@ -19,7 +20,9 @@ const PasswordField = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
+      id,
       type,
+      htmlFor,
       passwordVisibility,
       handlePasswordToggleState,
       ...props
@@ -28,7 +31,9 @@ const PasswordField = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     return (
       <div>
-        <p className=" font-semibold text-darkGreen mb-2">{props.label}</p>
+        <p className=" font-semibold text-darkGreen mb-2">
+          <label htmlFor={htmlFor}>{props.label}</label>
+        </p>
 
         <div className="relative ">
           {passwordVisibility ? (
@@ -45,6 +50,7 @@ const PasswordField = React.forwardRef<HTMLInputElement, InputProps>(
             />
           )}
           <input
+            id={id}
             autoComplete="off"
             autoSave="off"
             type={passwordVisibility ? type : "text"}

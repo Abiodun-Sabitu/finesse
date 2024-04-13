@@ -11,28 +11,24 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import useCountdownTimer from "@/lib/hooks/useCountDownTimer";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { Checkbox } from "@/components/ui/checkbox";
 import { AuthContext } from "@/lib/hooks/authContext";
 
 const Register = () => {
   // States
   const [passwordVisibility, setPasswordVisibility] = useState(true);
-  const [value, setOtpValue] = useState("");
-  const [hasVerifiedOtp, setHasVerifiedOtp] = useState(false);
+  const [signUpForm, setSignUpForm] = useState({
+    email: "",
+    otp: "",
+    password: "",
+    confirmPassword: "",
+    termOfUse: true,
+  });
 
-  // Handle otp verification
-  const handleSubmit = (e: any) => {
+  // Handle Submit
+  const handleSubmitSignUpForm = (e: any) => {
     e.preventDefault(); // Prevent form submission
-    console.log("Submitted OTP:", value);
-    setHasVerifiedOtp(true);
+    console.log(signUpForm);
   };
 
   const timeLeft = useCountdownTimer(60);
@@ -41,27 +37,12 @@ const Register = () => {
   return (
     <>
       <div className="bg-[#f5efe6d7] shadow-2xl rounded-lg">
-        <form className="p-8 rounded-lg" onSubmit={(e) => e.preventDefault()}>
+        <form className="p-8 rounded-lg" onSubmit={handleSubmitSignUpForm}>
           <h3 className="text-[1.2rem] font-extrabold text-khaki text-center pb-3">
             New User Sign Up
           </h3>
-          {value.length < 6 ? (
+          {signUpForm.otp.length < 6 ? (
             <>
-              {/* <div className="mt-2">
-                <p className=" font-semibold text-darkGreen mb-2">
-                  Merchant Type
-                </p>
-                <Select>
-                  <SelectTrigger className="w-full mb-5">
-                    <SelectValue placeholder="Select your merchant type " />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="light">Retailer</SelectItem>
-                    <SelectItem value="dark">Wholesaler</SelectItem>
-                    <SelectItem value="system">Distributor</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div> */}
               <div className="relative ">
                 <Button
                   className="mt-8 h-11 float-end relative z-30 cursor-pointer rounded-s-none"
@@ -76,6 +57,11 @@ const Register = () => {
                   label="Email"
                   placeholder="Verify your email"
                   className="absolute"
+                  htmlFor="email"
+                  value={signUpForm.email}
+                  onChange={(e) =>
+                    setSignUpForm({ ...signUpForm, email: e.target.value })
+                  }
                 />
               </div>
 
@@ -85,8 +71,10 @@ const Register = () => {
                 </p>
                 <InputOTP
                   maxLength={6}
-                  value={value}
-                  onChange={(value) => setOtpValue(value)}
+                  value={signUpForm.otp}
+                  onChange={(newOtpValue) =>
+                    setSignUpForm({ ...signUpForm, otp: newOtpValue })
+                  }
                 >
                   <InputOTPGroup>
                     <InputOTPSlot index={0} />
@@ -122,40 +110,53 @@ const Register = () => {
                 type="password"
                 name="createPassword"
                 label="Create Password"
+                value={signUpForm.password}
+                onChange={(e) =>
+                  setSignUpForm({ ...signUpForm, password: e.target.value })
+                }
                 placeholder="Enter password"
                 passwordVisibility={passwordVisibility}
                 handlePasswordToggleState={() =>
                   setPasswordVisibility(!passwordVisibility)
                 }
+                htmlFor="create_password"
               />
               <div className="mt-20">
                 <PasswordField
                   id="confirm_password"
                   type="password"
                   name="confirmPassword"
+                  htmlFor="confirm_password"
                   label="Confirm Password"
                   placeholder="Confirm password"
                   passwordVisibility={passwordVisibility}
                   handlePasswordToggleState={() =>
                     setPasswordVisibility(!passwordVisibility)
                   }
+                  value={signUpForm.confirmPassword}
+                  onChange={(e) =>
+                    setSignUpForm({
+                      ...signUpForm,
+                      confirmPassword: e.target.value,
+                    })
+                  }
                 />
               </div>
-              {/* <div className="mt-20">
-                <TextField
-                  id="phone_number"
-                  name="phoneNumber"
-                  type="select"
-                  label="Phone Number"
-                  placeholder="Enter Your Phone Number"
-                />
-              </div> */}
 
               <div className="flex items-center mt-20 gap-2 place-items-center">
-                <Checkbox id="terms" checked />
+                <Checkbox
+                  id="terms"
+                  checked={signUpForm.termOfUse} // Use `checked` for controlling the state
+                  onChange={(e: any) =>
+                    setSignUpForm({
+                      ...signUpForm,
+                      termOfUse: e.target.checked,
+                    })
+                  }
+                />
                 <label htmlFor="terms" className="text-battleShipGray text-sm">
                   Yes I agree to the{" "}
-                  <span className="underline cursor-pointer">terms of use</span>{" "}
+                  <span className="underline cursor-pointer">terms of use</span>
                 </label>
               </div>
 
@@ -163,7 +164,7 @@ const Register = () => {
                 <Button
                   className="w-full h-12"
                   variant="long"
-                  onClick={() => setCurrentView("login")}
+                  // onClick={() => setCurrentView("login")}
                 >
                   <span>Sign Up</span>
                 </Button>

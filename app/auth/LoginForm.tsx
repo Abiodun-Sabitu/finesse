@@ -11,8 +11,17 @@ const LoginForm = () => {
   //State Properties
   const [passwordVisibility, setPasswordVisibility] = useState(true);
 
-  const [loginForm, setLoginForm] = useState({});
+  const [loginForm, setLoginForm] = useState({
+    userEmail: "",
+    userPassword: "",
+  });
+
   const { setCurrentView } = useContext(AuthContext);
+
+  const handleLogin = () => {
+    console.log(loginForm);
+    setCurrentView("register");
+  };
 
   return (
     <>
@@ -27,10 +36,16 @@ const LoginForm = () => {
             type="email"
             label="Email"
             placeholder="Registered email"
+            htmlFor="email"
+            value={loginForm.userEmail}
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, userEmail: e.target.value })
+            }
           />
 
           <PasswordField
             id="password"
+            htmlFor="password"
             type="password"
             name="userPassword"
             label="Password"
@@ -38,6 +53,10 @@ const LoginForm = () => {
             passwordVisibility={passwordVisibility}
             handlePasswordToggleState={() =>
               setPasswordVisibility(!passwordVisibility)
+            }
+            value={loginForm.userPassword}
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, userPassword: e.target.value })
             }
           />
           <div
@@ -47,7 +66,11 @@ const LoginForm = () => {
             Forgot Password?
           </div>
           <div className="">
-            <Button className="w-full h-12 mt-8" variant="long">
+            <Button
+              className="w-full h-12 mt-8"
+              variant="long"
+              onClick={(e) => handleLogin()}
+            >
               <span className=""> Login</span>
             </Button>
           </div>
